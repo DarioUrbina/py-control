@@ -1,7 +1,7 @@
 
 import numpy as np
 
-class PID(object):
+class Dario(object):
     """Implementation of a PID controller.
 
     This implementation is geared towards discrete time systems,

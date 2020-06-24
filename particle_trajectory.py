@@ -2,14 +2,21 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import control as ctrl #Importing the control folder found in this same project
-
+"""
+A class MoveParticleProcess is defined (it has object-like function), later this class (object) will be used
+"""
 
 class MoveParticleProcess(ctrl.Process):
     """Models a dynamic system in which a particle driven by forces follows a desired trajectory. """
-    #Process: Abstract class for a process to be controlled.
+    """DUM: Process: Abstract class for a process to be controlled. Inside this class I added notes about
+    classese general structue"""
+    """DUM: This is a class that is inheriting methots from the class Process """ 
 
-    def __init__(self, particle=ctrl.Particle(), pid=ctrl.PID()):
+    def __init__(self, particle=ctrl.Particle(), pid=ctrl.Dario()):
         super(MoveParticleProcess, self).__init__()
+        """DUM:  at a high level super() gives you access to methods in a superclass from the
+        subclass that inherits from it. https://realpython.com/python-super/
+        """  
         self.particle = particle
         self.pid = pid
 
@@ -36,12 +43,12 @@ class MoveParticleProcess(ctrl.Process):
         then upates the motion equations by `dt`.
         """
         self.particle.add_force(u)
-        self.particle.add_force(np.array([0.5 * self.particle.mass]))
+        #self.particle.add_force(np.array([0.5 * self.particle.mass]))
         self.particle.update(dt)
 
 
 def runner(pid_params):
-    process = MoveParticleProcess(particle=ctrl.Particle(x0=[0], v0=[0], inv_mass=1.), pid=ctrl.PID(**pid_params))
+    process = MoveParticleProcess(particle=ctrl.Particle(x0=[0], v0=[0], inv_mass=1.), pid=ctrl.Dario(**pid_params))
     result = process.loop(tsim=50, dt=0.2)
     e = np.sum(np.square(result['e']))
     return e
@@ -54,14 +61,14 @@ def run():
         dict(kp=1.5, ki=0., kd=0.5),
     ]
 
-    # Additionally tune PID parameters
+    # Additionally tune PID(Dario) parameters
     params = ctrl.tune_twiddle(params=dict(kp=0., ki=0., kd=0.), costfunction=runner, eps=0.001)
     pid_params.append(params)
 
     # Run simulation for each set of PID params
     handles = []
     for idx, c in enumerate(pid_params):
-        process = MoveParticleProcess(particle=ctrl.Particle(x0=[0], v0=[0], inv_mass=1.), pid=ctrl.PID(**c))
+        process = MoveParticleProcess(particle=ctrl.Particle(x0=[0], v0=[0], inv_mass=1.), pid=ctrl.Dario(**c))
         result = process.loop(tsim=100, dt=0.1)
 
         if idx == 0:

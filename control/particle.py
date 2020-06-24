@@ -1,6 +1,6 @@
 
 import numpy as np
-
+    
 class Particle(object):
     """A particle in n-dimensions driven by forces."""
 
