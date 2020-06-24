@@ -1,11 +1,12 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
-import control as ctrl
+import control as ctrl #Importing the control folder found in this same project
 
 
 class MoveParticleProcess(ctrl.Process):
     """Models a dynamic system in which a particle driven by forces follows a desired trajectory. """
+    #Process: Abstract class for a process to be controlled.
 
     def __init__(self, particle=ctrl.Particle(), pid=ctrl.PID()):
         super(MoveParticleProcess, self).__init__()
@@ -35,6 +36,7 @@ class MoveParticleProcess(ctrl.Process):
         then upates the motion equations by `dt`.
         """
         self.particle.add_force(u)
+        self.particle.add_force(np.array([0.5 * self.particle.mass]))
         self.particle.update(dt)
 
 

@@ -7,6 +7,9 @@ class Process(object):
 
     def __init__(self):
         self.reset()
+        """self represents the instance of the class. By using the “self” keyword we can access the attributes
+        and methods of the class in python. It binds the attributes with the given arguments.
+        https://www.geeksforgeeks.org/self-in-python-class/ """
 
     def update(self, dt):
         # Read the set point
