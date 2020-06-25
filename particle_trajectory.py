@@ -1,5 +1,5 @@
 #hello, I will stash this because I want to go to a branch without commiting.
-#(Only line one) I will remove this line "2"
+#(Only line one) I will remove this line "3"
 import numpy as np
 import matplotlib.pyplot as plt
 import control as ctrl #Importing the control folder found in this same project
